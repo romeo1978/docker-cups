@@ -1,5 +1,5 @@
 # base image
-ARG ARCH=amd64
+ARG ARCH=arm64
 FROM $ARCH/debian:buster-slim
 
 # args
