@@ -49,6 +49,7 @@ RUN cp -rp /etc/cups /etc/cups-skel
 # set default password for user 'admin' to 'admin'
 RUN echo "admin:admin" | chpasswd
 
+
 # user management script
 ADD user-management.bash /usr/local/bin/user-management
 
