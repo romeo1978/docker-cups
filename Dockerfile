@@ -22,6 +22,7 @@ RUN apt-get update \
   hpijs-ppds \
   hp-ppd \
   hplip \
+  hplip-plugin \
   dumb-init \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
