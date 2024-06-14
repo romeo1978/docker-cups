@@ -2,8 +2,13 @@ name: Build and Upload Docker Image as Artifact
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "dev", "master" ]
+  pull_request:
+    branches: [ "dev", "master" ]
+
+env:
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: cups
 
 jobs:
   build-and-upload:
@@ -17,14 +22,14 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t cups:latest --load .
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ env.IMAGE_NAME }}:latest --load .
 
       - name: Save Docker image
         run: |
-          docker save cups:latest -o cups.tar
+          docker save ${{ env.IMAGE_NAME }}:latest -o ${{ env.IMAGE_NAME }}.tar
 
       - name: Upload Docker image to artifacts
         uses: actions/upload-artifact@main
         with:
           name: docker-image
-          path: cups.tar
+          path: ${{ env.IMAGE_NAME }}.tar
